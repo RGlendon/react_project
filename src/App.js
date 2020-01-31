@@ -1,9 +1,9 @@
 import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import Header from './components/Header';
-import Nav from './components/Nav';
-import Main from './components/Main';
+import Header from './blocks/Header/Header';
+import Nav from './blocks/Nav/Nav';
+// import Main from './blocks/Main/Main';
 
 
 
@@ -12,7 +12,7 @@ function App() {
     <div className="starting">
       <Header />
       <Nav />
-      <Main />
+      {/*<Main />*/}
     </div>
   );
 }

@@ -13,21 +13,12 @@
   "nav main";
 }
 
+
 .logo {
   height: 100%;
 }
 
-.header {
-  grid-area: header;
-  background-color: #e9f170;
-}
 
-.nav {
-  grid-area: nav;
-  background-color: #e9f170;
-}
 
-.main {
-  grid-area: main;
-  background-color: rgb(230, 101, 101);
-}
+
+
