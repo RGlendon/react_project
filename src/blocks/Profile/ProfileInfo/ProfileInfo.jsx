@@ -1,15 +1,14 @@
 import React from 'react';
-import s from './Main.module.css';
-import Posts from './MyPosts/Posts';
+import s from './ProfileInfo.module.css';
 
-function Main() {
+
+function ProfileInfo() {
   return (
-    <main className={s.main}>
+    <div className={s.info}>
       <img src="https://avatars.mds.yandex.net/get-pdb/1220164/731fcc94-9a7a-4a04-b01e-e85b7e683e90/s1200" alt=""/>
       My ava + information
-      <Posts />
-    </main>
+    </div>
   );
 }
 
-export default Main;
+export default ProfileInfo;
