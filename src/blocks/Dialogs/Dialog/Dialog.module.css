@@ -1,0 +1,18 @@
+.dialog {
+margin: 5px auto;
+}
+
+.image {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a.active {
+    color: #07c2f2;
+}

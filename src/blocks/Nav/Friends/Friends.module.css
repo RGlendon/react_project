@@ -1,0 +1,15 @@
+.friends {
+  width: 90%;
+  margin: 90px auto 0px;
+}
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.title {
+  text-align: center;
+}
+

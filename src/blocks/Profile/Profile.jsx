@@ -3,11 +3,13 @@ import s from './Profile.module.css';
 import Posts from './MyPosts/Posts';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-function Profile() {
-  return (
+
+function Profile(props) {
+
+    return (
     <main className={s.main}>
       <ProfileInfo/>
-      <Posts />
+      <Posts posts={props.state.posts} />
     </main>
   );
 }

@@ -1,9 +1,10 @@
 import React from 'react';
 import s from './Nav.module.css';
 import {NavLink} from "react-router-dom";
+import Friends from "./Friends/Friends";
 
-function Nav() {
-    console.log(s);
+function NavBaar(props) {
+
   return (
     <nav className={s.nav}>
       <ul className={s.list}>
@@ -13,8 +14,9 @@ function Nav() {
         <li><NavLink to="/music" className={s.link} activeClassName={s.link_active}>Music</NavLink></li>
         <li><NavLink to="settings" className={s.link} activeClassName={s.link_active}>Settings</NavLink></li>
       </ul>
+      <Friends friends={props.state.friends}/>
     </nav>
   );
 }
 
-export default Nav;
+export default NavBaar;
