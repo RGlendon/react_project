@@ -5,7 +5,7 @@ import Header from './blocks/Header/Header';
 import NavBaar from './blocks/Nav/NavBaar';
 import Profile from './blocks/Profile/Profile';
 import Dialogs from "./blocks/Dialogs/Dialogs";
-import {BrowserRouter, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 import News from "./blocks/News/News";
 import Music from "./blocks/Music/Music";
 import Settings from "./blocks/Settings/Settings";
@@ -13,23 +13,22 @@ import Settings from "./blocks/Settings/Settings";
 
 function App(props) {
 
+  return (
+    <div className="wrapper">
+      <Header/>
+      <NavBaar state={props.state.navbaar}/>
+      <div className='wrapper__main'>
+        <Route path='/profile' render={() => <Profile profilePage={props.state.profilePage}
+                                                      addPost={props.addPost}
+                                                      updateNewTextPost={props.updateNewTextPost}/>}/>
+        <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage}/>}/>
 
-    return (
-        <BrowserRouter>
-            <div className="wrapper">
-                <Header />
-                <NavBaar state={props.state.navbaar}/>
-                <div className='wrapper__main'>
-                    <Route path='/profile' render={() => <Profile state={props.state.profilePage}/>} />
-                    <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage}/>} />
-
-                    <Route path='/news' component={News}/>
-                    <Route path='/music' component={Music}/>
-                    <Route path='/settings' component={Settings}/>
-                </div>
-            </div>
-        </BrowserRouter>
-    );
+        <Route path='/news' component={News}/>
+        <Route path='/music' component={Music}/>
+        <Route path='/settings' component={Settings}/>
+      </div>
+    </div>
+  );
 }
 
 export default App;

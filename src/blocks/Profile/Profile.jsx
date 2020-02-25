@@ -9,7 +9,10 @@ function Profile(props) {
     return (
     <main className={s.main}>
       <ProfileInfo/>
-      <Posts posts={props.state.posts} />
+      <Posts posts={props.profilePage.posts}
+             updateNewTextPost={props.updateNewTextPost}
+             newText={props.profilePage.newTextPost}
+             addPost={props.addPost}/>
     </main>
   );
 }

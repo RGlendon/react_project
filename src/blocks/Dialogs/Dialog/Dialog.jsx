@@ -4,9 +4,11 @@ import {NavLink} from "react-router-dom";
 
 
 function Dialog(props) {
+
+
     return (
         <div className={s.dialog}>
-            <img className={s.image} src={props.src} alt='image'/>
+            <img className={s.image} src={props.src} alt='img'/>
             <NavLink to={'/dialogs/' + props.id} activeClassName={s.active}>{props.name}</NavLink>
         </div>
     );

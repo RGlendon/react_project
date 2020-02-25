@@ -7,7 +7,7 @@ function Friend(props) {
 
   return (
         <div className={s.friend}>
-          <img src={props.src}/>
+          <img src={props.src} alt=""/>
           <p>{props.name}</p>
         </div>
 
