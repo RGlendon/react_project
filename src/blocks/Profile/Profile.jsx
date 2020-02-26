@@ -10,9 +10,8 @@ function Profile(props) {
     <main className={s.main}>
       <ProfileInfo/>
       <Posts posts={props.profilePage.posts}
-             updateNewTextPost={props.updateNewTextPost}
              newText={props.profilePage.newTextPost}
-             addPost={props.addPost}/>
+             dispatch={props.dispatch}/>
     </main>
   );
 }

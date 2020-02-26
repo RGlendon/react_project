@@ -19,8 +19,7 @@ function App(props) {
       <NavBaar state={props.state.navbaar}/>
       <div className='wrapper__main'>
         <Route path='/profile' render={() => <Profile profilePage={props.state.profilePage}
-                                                      addPost={props.addPost}
-                                                      updateNewTextPost={props.updateNewTextPost}/>}/>
+                                                      dispatch={props.dispatch} />}/>
         <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage}/>}/>
 
         <Route path='/news' component={News}/>

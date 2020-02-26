@@ -1,3 +1,6 @@
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+
 let store = {
     _state: {
         navbaar: {
@@ -53,27 +56,46 @@ let store = {
     _rerenderAllTree() {
         console.log('заглушка. эту функцию переопределим в App через другую функцию');
     },
-
-    addPost() {
-        let newPost = {
-            id: 8,
-            message: this._state.profilePage.newTextPost,
-            likesCount: 0
-        };
-        this._state.profilePage.posts.push(newPost);
-        this._state.profilePage.newTextPost = '';
-        this._rerenderAllTree(this._state);
-    },
-
-    updateNewTextPost(newText) {
-        this._state.profilePage.newTextPost = newText;
-        this._rerenderAllTree(this._state);
-    },
-
     subscribe(observer) {
         this._rerenderAllTree = observer;  //это паттерн (observer). Переносим функцию через присваивание, для избежания циклического импорта
+    },
+
+    // addPost() {
+    //     let newPost = {
+    //         id: 8,
+    //         message: this._state.profilePage.newTextPost,
+    //         likesCount: 0
+    //     };
+    //     this._state.profilePage.posts.push(newPost);
+    //     this._state.profilePage.newTextPost = '';
+    //     this._rerenderAllTree();
+    // },
+    // updateNewTextPost(newText) {
+    //     this._state.profilePage.newTextPost = newText;
+    //     this._rerenderAllTree();
+    // },
+
+    dispatch(action) {
+        if (action.type === ADD_POST) {
+            let newPost = {
+                id: 8,
+                message: this._state.profilePage.newTextPost,
+                likesCount: 0
+            };
+            this._state.profilePage.posts.push(newPost);
+            this._state.profilePage.newTextPost = '';
+            this._rerenderAllTree();
+        }
+
+        else if (action.type === UPDATE_NEW_POST_TEXT) {
+            this._state.profilePage.newTextPost = action.newText;
+            this._rerenderAllTree();
+        }
     }
 }
+
+export const addPostActionCreator  = () => ({type: ADD_POST});
+export const updateNewTextPostActionCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text});
 
 window.store = store;
 export default store;

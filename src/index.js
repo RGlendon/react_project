@@ -6,15 +6,15 @@ import './index.css';
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
 
-function renderEntireTree(state) {
+function renderEntireTree() {
     ReactDOM.render(
         <BrowserRouter>
-            <App state={state} addPost={store.addPost.bind(store)} updateNewTextPost={store.updateNewTextPost.bind(store)}/>
+            <App state={store.getState()} dispatch={store.dispatch.bind(store)}/>
         </BrowserRouter>,
         document.getElementById('root'));
 }
 
-renderEntireTree(store.getState());
+renderEntireTree();
 
 store.subscribe(renderEntireTree);
 
