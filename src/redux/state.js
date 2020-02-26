@@ -1,5 +1,7 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const ADD_MESSAGE = 'ADD-MESSAGE';
+const UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT';
 
 let store = {
     _state: {
@@ -45,7 +47,8 @@ let store = {
                 {id: 5, message: 'I think your react practice is really good'},
                 {id: 6, message: 'Hi'},
                 {id: 7, message: "What's up man?"}
-            ]
+            ],
+            newMessageText: 'протестим'
         }
     },
     getState() {
@@ -91,11 +94,28 @@ let store = {
             this._state.profilePage.newTextPost = action.newText;
             this._rerenderAllTree();
         }
+
+        else if (action.type === ADD_MESSAGE) {
+            const newMessage = {
+                id: 8,
+                message: this._state.dialogsPage.newMessageText
+            };
+            this._state.dialogsPage.messages.push(newMessage);
+            this._state.dialogsPage.newMessageText = '';
+            this._rerenderAllTree();
+        }
+
+        else if (action.type === UPDATE_MESSAGE_TEXT) {
+            this._state.dialogsPage.newMessageText = action.newText;
+            this._rerenderAllTree();
+        }
     }
 }
 
-export const addPostActionCreator  = () => ({type: ADD_POST});
+export const addPostActionCreator = () => ({type: ADD_POST});
 export const updateNewTextPostActionCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text});
+export const addMessageActionCreator = () => ({type: ADD_MESSAGE});
+export const updateMessageTextActionCreator = (text) => ({type: UPDATE_MESSAGE_TEXT, newText: text});
 
 window.store = store;
 export default store;
