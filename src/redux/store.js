@@ -1,7 +1,7 @@
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT';
+import profileReducer from "./profileReducer";
+import dialogsReducer from "./dialogsReducer";
+import navbaarReducer from "./navbaarReducer";
+
 
 let store = {
     _state: {
@@ -63,59 +63,15 @@ let store = {
         this._rerenderAllTree = observer;  //это паттерн (observer). Переносим функцию через присваивание, для избежания циклического импорта
     },
 
-    // addPost() {
-    //     let newPost = {
-    //         id: 8,
-    //         message: this._state.profilePage.newTextPost,
-    //         likesCount: 0
-    //     };
-    //     this._state.profilePage.posts.push(newPost);
-    //     this._state.profilePage.newTextPost = '';
-    //     this._rerenderAllTree();
-    // },
-    // updateNewTextPost(newText) {
-    //     this._state.profilePage.newTextPost = newText;
-    //     this._rerenderAllTree();
-    // },
-
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            let newPost = {
-                id: 8,
-                message: this._state.profilePage.newTextPost,
-                likesCount: 0
-            };
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newTextPost = '';
-            this._rerenderAllTree();
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        this._state.navbaar = navbaarReducer(this._state.navbaar, action);
 
-        else if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.profilePage.newTextPost = action.newText;
-            this._rerenderAllTree();
-        }
-
-        else if (action.type === ADD_MESSAGE) {
-            const newMessage = {
-                id: 8,
-                message: this._state.dialogsPage.newMessageText
-            };
-            this._state.dialogsPage.messages.push(newMessage);
-            this._state.dialogsPage.newMessageText = '';
-            this._rerenderAllTree();
-        }
-
-        else if (action.type === UPDATE_MESSAGE_TEXT) {
-            this._state.dialogsPage.newMessageText = action.newText;
-            this._rerenderAllTree();
-        }
+        this._rerenderAllTree();
     }
 }
 
-export const addPostActionCreator = () => ({type: ADD_POST});
-export const updateNewTextPostActionCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text});
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE});
-export const updateMessageTextActionCreator = (text) => ({type: UPDATE_MESSAGE_TEXT, newText: text});
 
 window.store = store;
 export default store;
