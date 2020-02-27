@@ -14,22 +14,26 @@ const initialState = {
     newTextPost: 'тестовая информация'
 };
 
-function profileReducer(profilePage = initialState, action) {
+function profileReducer(state = initialState, action) {
     switch (action.type) {
         case ADD_POST:
             let newPost = {
                 id: 8,
-                message: profilePage.newTextPost,
+                message: state.newTextPost,
                 likesCount: 0
             };
-            profilePage.posts.push(newPost);
-            profilePage.newTextPost = '';
-            return profilePage;
+            return {
+                ...state,
+                posts: [...state.posts, newPost],
+                newTextPost: ''
+            };
         case UPDATE_NEW_POST_TEXT:
-            profilePage.newTextPost = action.newText;
-            return profilePage;
+            return {
+                ...state,
+                newTextPost: action.newText
+            };
         default:
-            return profilePage;
+            return state;
     }
 }
 

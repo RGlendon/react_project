@@ -20,21 +20,25 @@ const initialState = {
     newMessageText: 'протестим'
 };
 
-function dialogsReducer(dialogsPage = initialState, action) {
+function dialogsReducer(state = initialState, action) {
     switch (action.type) {
         case ADD_MESSAGE:
             const newMessage = {
                 id: 8,
-                message: dialogsPage.newMessageText
+                message: state.newMessageText
             };
-            dialogsPage.messages.push(newMessage);
-            dialogsPage.newMessageText = '';
-            return dialogsPage;
+            return {
+                ...state,
+                messages: [ ...state.messages, newMessage],
+                newMessageText: ''
+            };
         case UPDATE_MESSAGE_TEXT:
-            dialogsPage.newMessageText = action.newText;
-            return dialogsPage;
+            return {
+                ...state,
+                newMessageText: action.newText
+            };
         default:
-            return dialogsPage;
+            return state;
     }
 }
 

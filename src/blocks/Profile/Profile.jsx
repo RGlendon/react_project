@@ -4,11 +4,11 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import PostsContainer from "./MyPosts/PostsContainer";
 
 
-function Profile(props) {
+function Profile() {
     return (
         <main className={s.main}>
             <ProfileInfo/>
-            <PostsContainer store={props.store}/>
+            <PostsContainer />
         </main>
     );
 }
