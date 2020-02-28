@@ -1,0 +1,28 @@
+.photo {
+    width: 100px;
+}
+
+.userWrapper {
+    display: flex;
+    margin: 15px;
+}
+
+.mainInfo {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.selectedPage {
+    font-weight: bold;
+}
+
+.pageNumber {
+    margin: 5px;
+    cursor: pointer;
+}
+
+.pageNumbersWrapper {
+    display: flex;
+    flex-wrap: wrap;
+}

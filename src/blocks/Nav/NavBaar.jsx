@@ -12,7 +12,8 @@ function NavBaar(props) {
         <li><NavLink to="/dialogs" className={s.link} activeClassName={s.link_active}>Message</NavLink></li>
         <li><NavLink to="/news" className={s.link} activeClassName={s.link_active}>News</NavLink></li>
         <li><NavLink to="/music" className={s.link} activeClassName={s.link_active}>Music</NavLink></li>
-        <li><NavLink to="settings" className={s.link} activeClassName={s.link_active}>Settings</NavLink></li>
+        <li><NavLink to="/settings" className={s.link} activeClassName={s.link_active}>Settings</NavLink></li>
+        <li><NavLink to="/users" className={s.link} activeClassName={s.link_active}>Users</NavLink></li>
       </ul>
       <Friends friends={props.state.friends}/>
     </nav>

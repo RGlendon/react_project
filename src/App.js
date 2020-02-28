@@ -9,6 +9,7 @@ import News from "./blocks/News/News";
 import Music from "./blocks/Music/Music";
 import Settings from "./blocks/Settings/Settings";
 import DialogsContainer from "./blocks/Dialogs/DialogsContainer";
+import UsersContainer from "./blocks/Users/UsersContainer";
 
 
 function App(props) {
@@ -20,6 +21,7 @@ function App(props) {
             <div className='wrapper__main'>
                 <Route path='/profile' render={() => <Profile />}/>
                 <Route path='/dialogs' render={() => <DialogsContainer />}/>
+                <Route path='/users' render={() => <UsersContainer />}/>
 
                 <Route path='/news' component={News}/>
                 <Route path='/music' component={Music}/>
