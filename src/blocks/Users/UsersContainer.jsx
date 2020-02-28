@@ -39,6 +39,8 @@ class UsersAPI extends React.Component {
     }
 
     render() {
+        //можно использовать оператор расширения, для передачи всех пропрос в компоненту (в данном случае это не оч варик)
+        // return <Users {...this.props} setCurrentPage={this.setCurrentPage}/>
         return <Users totalCount={this.props.totalCount}
                       pageSize={this.props.pageSize}
                       currentPage={this.props.currentPage}
