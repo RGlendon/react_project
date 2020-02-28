@@ -2,6 +2,7 @@ const FOLLOWED_TOGGLE = 'FOLLOWED_TOGGLE';
 const SET_USERS = 'SET_USERS';
 const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const SET_PRELOADER = 'SET_PRELOADER';
 
 const initialState = {
     users: [
@@ -33,6 +34,7 @@ const initialState = {
     currentPage: 1,
     pageSize: 15,
     totalCount: 30,
+    isLoading: false
 }
 
 function usersReducer(state = initialState, action) {
@@ -62,6 +64,11 @@ function usersReducer(state = initialState, action) {
                 ...state,
                 currentPage: action.currentPage
             }
+        case SET_PRELOADER:
+            return {
+                ...state,
+                isLoading: action.isLoading
+            }
         default:
             return state;
     }
@@ -70,7 +77,8 @@ function usersReducer(state = initialState, action) {
 
 export default usersReducer;
 
-export const followedAC = (userID) => ({type: FOLLOWED_TOGGLE, userID});
-export const setUsersAC = (users) => ({type: SET_USERS, users});
-export const setTotalCountAC  = (totalCount) => ({type: SET_TOTAL_COUNT, totalCount});
-export  const setCurrentPageAC = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage})
+export const followToggle = (userID) => ({type: FOLLOWED_TOGGLE, userID});
+export const setUsers = (users) => ({type: SET_USERS, users});
+export const setTotalCount  = (totalCount) => ({type: SET_TOTAL_COUNT, totalCount});
+export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
+export const setPreloader = (isLoading) => ({type: SET_PRELOADER, isLoading});
