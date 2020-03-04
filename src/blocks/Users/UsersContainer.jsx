@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import {
-    followToggle,
+    followToggle, makeDisable,
     setCurrentPage,
     setPreloader,
     setTotalCount,
@@ -9,12 +9,12 @@ import {
 import React from "react";
 import * as axios from "axios";
 import Users from "./Users";
+import {usersAPI} from "../../api/usersAPI";
 
 class UsersAPI extends React.Component {
     componentDidMount() {
         this.props.setPreloader(true);
-        axios
-            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
             .then(resp => {
                 // console.log(resp);
                 this.props.setPreloader(false);
@@ -23,13 +23,12 @@ class UsersAPI extends React.Component {
             })
     }
 
-    //почему-то при исп стрелочной функции контекст не теряется. Вызываем в onClick, поидее надо bind использовать
+    //при исп стрелочной функции контекст не теряется. Вызываем в onClick, поидее надо bind использовать
     setCurrentPage = (p) => {
         this.props.setPreloader(true);
         this.props.setCurrentPage(p);
         //реакт не успеет поменять currentPage, axios запрос выполнит первее, поэтому указываем здесь актуальную страницу
-        axios
-            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`)
+        usersAPI.getUsers(p, this.props.pageSize)
             .then(resp => {
                 // console.log(resp);
                 this.props.setPreloader(false);
@@ -47,7 +46,9 @@ class UsersAPI extends React.Component {
                       users={this.props.users}
                       followToggle={this.props.followToggle}
                       setCurrentPage={this.setCurrentPage}
-                      isLoading={this.props.isLoading}/>
+                      isLoading={this.props.isLoading}
+                      makeDisable={this.props.makeDisable}
+                      disabled={this.props.disabled}/>
     }
 }
 
@@ -59,6 +60,7 @@ function mapStateToProps(state) {
         pageSize: state.usersPage.pageSize,
         totalCount: state.usersPage.totalCount,
         isLoading: state.usersPage.isLoading,
+        disabled: state.usersPage.disabled,
     }
 }
 
@@ -89,6 +91,7 @@ let mapDispatchToProps = {
     setTotalCount,
     setCurrentPage,
     setPreloader,
+    makeDisable
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersAPI);

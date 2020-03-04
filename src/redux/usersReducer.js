@@ -3,6 +3,7 @@ const SET_USERS = 'SET_USERS';
 const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_PRELOADER = 'SET_PRELOADER';
+const MAKE_DISABLE = 'MAKE_DISABLE';
 
 const initialState = {
     users: [
@@ -34,7 +35,8 @@ const initialState = {
     currentPage: 1,
     pageSize: 15,
     totalCount: 30,
-    isLoading: false
+    isLoading: false,
+    disabled: []
 }
 
 function usersReducer(state = initialState, action) {
@@ -63,12 +65,17 @@ function usersReducer(state = initialState, action) {
             return {
                 ...state,
                 currentPage: action.currentPage
-            }
+            };
         case SET_PRELOADER:
             return {
                 ...state,
                 isLoading: action.isLoading
-            }
+            };
+        case MAKE_DISABLE:
+            return {
+                ...state,
+                disabled: action.disabled ? [...state.disabled, action.userId] : state.disabled.filter( id => id !== action.userId)
+            };
         default:
             return state;
     }
@@ -82,3 +89,4 @@ export const setUsers = (users) => ({type: SET_USERS, users});
 export const setTotalCount  = (totalCount) => ({type: SET_TOTAL_COUNT, totalCount});
 export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
 export const setPreloader = (isLoading) => ({type: SET_PRELOADER, isLoading});
+export const makeDisable = (disabled, userId) => ({type: MAKE_DISABLE, disabled, userId});
