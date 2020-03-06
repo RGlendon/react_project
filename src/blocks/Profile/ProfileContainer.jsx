@@ -1,7 +1,7 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getProfile} from "../../redux/profileReducer";
+import {getProfile, getStatus, updateStatus} from "../../redux/profileReducer";
 import {withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
@@ -9,24 +9,31 @@ import {compose} from "redux";
 
 class ProfileAPI extends React.Component {
     componentDidMount() {
-        let userId = this.props.match.params.userId || 2;
-        this.props.getProfile(userId)
+        let userId = this.props.match.params.userId || 6174;
+        this.props.getProfile(userId);
+        this.props.getStatus(userId);
     }
 
     render() {
-        return <Profile userProfile={this.props.userProfile}/>
+        return <Profile userProfile={this.props.userProfile}
+                        status={this.props.status}
+                        getStatus={this.props.getStatus}
+                        updateStatus={this.props.updateStatus}/>
     }
 }
 
 function mapStateToProps(state) {
     return {
         userProfile: state.profilePage.userProfile,
+        status: state.profilePage.status,
     }
 }
 
 const mapDispatchToProps = {
     //thunkCreators
-    getProfile
+    getProfile,
+    getStatus,
+    updateStatus,
 }
 
 export default compose(

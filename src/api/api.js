@@ -9,29 +9,38 @@ const instance = axios.create({
 });
 
 export const usersAPI = {
-    instance,
-
     getUsers(currentPage, pageSize) {
-        return this.instance.get(`/users?page=${currentPage}&count=${pageSize}`);
+        return instance.get(`/users?page=${currentPage}&count=${pageSize}`);
     },
 
     unfollow(userId) {
-        return this.instance.delete(`/follow/${userId}`);
+        return instance.delete(`/follow/${userId}`);
     },
 
     follow(userId) {
-        return this.instance.post(`/follow/${userId}`);
+        return instance.post(`/follow/${userId}`);
     },
 
     getProfile(userId) {
-        return this.instance.get(`/profile/` + userId);
+        console.warn('Absolete method, please use profileAPI.getProfile');
+        return profileAPI.getProfile(userId);
+    }
+};
+
+export const profileAPI = {
+    getProfile(userId) {
+        return instance.get(`/profile/` + userId);
+    },
+    getStatus(userId) {
+        return instance.get(`/profile/status/${userId}`)
+    },
+    updateStatus(status) {
+        return instance.put('/profile/status', {status: status})
     }
 }
 
 export const authAPI = {
-    instance,
-
     me() {
-        return this.instance.get(`/auth/me`)
+        return instance.get(`/auth/me`);
     }
-}
+};

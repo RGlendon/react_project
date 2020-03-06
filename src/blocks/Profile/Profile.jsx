@@ -5,10 +5,14 @@ import PostsContainer from "./MyPosts/PostsContainer";
 
 
 function Profile(props) {
+
     return (
         <main className={s.main}>
-            <ProfileInfo userProfile={props.userProfile}/>
-            <PostsContainer />
+            <ProfileInfo userProfile={props.userProfile}
+                         status={props.status}
+                         getStatus={props.getStatus}
+                         updateStatus={props.updateStatus}/>
+            <PostsContainer/>
         </main>
     );
 }
