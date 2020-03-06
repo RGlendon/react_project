@@ -1,3 +1,5 @@
+import {usersAPI} from "../api/api";
+
 const FOLLOWED_TOGGLE = 'FOLLOWED_TOGGLE';
 const SET_USERS = 'SET_USERS';
 const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT';
@@ -90,3 +92,39 @@ export const setTotalCount  = (totalCount) => ({type: SET_TOTAL_COUNT, totalCoun
 export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
 export const setPreloader = (isLoading) => ({type: SET_PRELOADER, isLoading});
 export const makeDisable = (disabled, userId) => ({type: MAKE_DISABLE, disabled, userId});
+
+export const getUsersThunkCreator = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(setPreloader(true));
+        usersAPI.getUsers(currentPage, pageSize)
+            .then(resp => {
+                dispatch(setPreloader(false));
+                dispatch(setUsers(resp.data.items));
+                dispatch(setTotalCount(resp.data.totalCount));
+            })
+    }
+};
+export const unfollowThunkCreator = (userId) => {
+    return (dispatch) => {
+        dispatch(makeDisable(true, userId));
+        usersAPI.unfollow(userId)
+            .then(resp => {
+                if (resp.data.resultCode === 0) {
+                    dispatch(followToggle(userId));
+                }
+                dispatch(makeDisable(false, userId));
+            });
+    }
+};
+export const followThunkCreator = (userId) => {
+    return (dispatch) => {
+        dispatch(makeDisable(true, userId));
+        usersAPI.follow(userId)
+            .then(resp => {
+                if (resp.data.resultCode === 0) {
+                    dispatch(followToggle(userId));
+                }
+                dispatch(makeDisable(false, userId));
+            });
+    }
+};

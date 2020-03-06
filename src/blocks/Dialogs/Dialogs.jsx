@@ -2,6 +2,7 @@ import React from 'react';
 import s from './Dialogs.module.css';
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
+import {Redirect} from "react-router-dom";
 
 
 
@@ -17,6 +18,8 @@ function Dialogs(props) {
         let text = event.target.value;
         props.updateMessageText(text);
     }
+
+    // if (!props.isLogin) return <Redirect to='/login' />
 
     return (
         <div className={s.dialogs}>

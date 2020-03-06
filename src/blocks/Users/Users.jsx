@@ -2,7 +2,7 @@ import React from "react";
 import s from './Users.module.css';
 import Preloader from "../common/Preloader/Preloader";
 import {NavLink} from "react-router-dom";
-import * as axios from "axios";
+
 
 function Users(props) {
     let pageCount = Math.ceil(props.totalCount / props.pageSize);
@@ -35,42 +35,10 @@ function Users(props) {
                             </NavLink>
                             <div>
                                 {u.followed
-                                    ? <button disabled={props.disabled.some(id => id === u.id)} onClick={() => {
-                                        // debugger
-                                        props.makeDisable(true, u.id);
-                                        axios
-                                            .delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                                                withCredentials: true,
-                                                headers: {
-                                                    'api-key': '951be1b4-e53d-4f02-b7b3-34c9b3cb8b52'
-                                                }
-                                            })
-                                            .then(resp => {
-                                                // console.log(resp);
-                                                if (resp.data.resultCode === 0) {
-                                                    props.followToggle(u.id);
-                                                }
-                                                props.makeDisable(false, u.id);
-                                            });
-                                    }}>Unfollow</button>
-                                    : <button disabled={props.disabled.some(id => id === u.id)} onClick={() => {
-                                        // debugger
-                                        props.makeDisable(true, u.id);
-                                        axios
-                                            .post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                                                withCredentials: true,
-                                                headers: {
-                                                    'api-key': '951be1b4-e53d-4f02-b7b3-34c9b3cb8b52'
-                                                }
-                                            })
-                                            .then(resp => {
-                                                console.log(resp);
-                                                if (resp.data.resultCode === 0) {
-                                                    props.followToggle(u.id);
-                                                }
-                                                props.makeDisable(false, u.id);
-                                            });
-                                    }}>Follow</button>}
+                                    ? <button disabled={props.disabled.some(id => id === u.id)}
+                                              onClick={() => {props.unfollowThunkCreator(u.id);}}>Unfollow</button>
+                                    : <button disabled={props.disabled.some(id => id === u.id)}
+                                              onClick={() => {props.followThunkCreator(u.id);}}>Follow</button>}
                             </div>
                         </div>
                         <div className={s.mainInfo}>

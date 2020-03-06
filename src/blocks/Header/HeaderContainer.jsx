@@ -1,21 +1,13 @@
 import React from 'react';
 import Header from "./Header";
 import {connect} from "react-redux";
-import * as axios from "axios";
-import {setAuthInfo} from "../../redux/authReducer";
+import {getAuthData, setAuthInfo} from "../../redux/authReducer";
+import {authAPI} from "../../api/api";
 
 
 class HeaderAPI extends React.Component {
     componentDidMount() {
-        axios
-            .get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-                withCredentials: true,
-            })
-            .then(resp => {
-                if (resp.data.resultCode === 0) {
-                    this.props.setAuthInfo(resp.data.data);
-                }
-            })
+        this.props.getAuthData();
     }
 
     render() {
@@ -31,7 +23,8 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-    setAuthInfo,
+    // thunkCreators
+    getAuthData
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderAPI);

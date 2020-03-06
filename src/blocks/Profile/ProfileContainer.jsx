@@ -1,19 +1,16 @@
 import React from 'react';
 import Profile from "./Profile";
-import * as axios from "axios";
 import {connect} from "react-redux";
-import {setUserProfile} from "../../redux/profileReducer";
+import {getProfile} from "../../redux/profileReducer";
 import {withRouter} from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 class ProfileAPI extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userId || 2;
-        axios
-            .get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-            .then(resp => {
-                this.props.setUserProfile(resp.data);
-            })
+        this.props.getProfile(userId)
     }
 
     render() {
@@ -28,11 +25,14 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-    setUserProfile,
+    //thunkCreators
+    getProfile
 }
 
-const ProfileURL = withRouter(ProfileAPI);
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileURL);
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withRouter,
+    withAuthRedirect
+)(ProfileAPI);
 
 

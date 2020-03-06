@@ -10,6 +10,7 @@ import DialogsContainer from "./blocks/Dialogs/DialogsContainer";
 import UsersContainer from "./blocks/Users/UsersContainer";
 import ProfileContainer from "./blocks/Profile/ProfileContainer";
 import HeaderContainer from "./blocks/Header/HeaderContainer";
+import Login from "./blocks/Login/Login";
 
 
 function App(props) {
@@ -22,6 +23,8 @@ function App(props) {
                 <Route path='/profile/:userId?' render={() => <ProfileContainer />}/>
                 <Route path='/dialogs' render={() => <DialogsContainer />}/>
                 <Route path='/users' render={() => <UsersContainer />}/>
+
+                <Route path='/login' render={() => <Login />}/>
 
                 <Route path='/news' component={News}/>
                 <Route path='/music' component={Music}/>
