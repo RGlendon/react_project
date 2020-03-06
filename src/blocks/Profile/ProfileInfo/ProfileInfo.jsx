@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
+import ProfileStatus from "./ProfileStatus";
 
 
 function ProfileInfo(props) {
@@ -12,9 +13,9 @@ function ProfileInfo(props) {
                 <img className={s.background}
                      src="https://avatars.mds.yandex.net/get-pdb/1220164/731fcc94-9a7a-4a04-b01e-e85b7e683e90/s1200"
                      alt=""/>
-                My ava + information
             </div>
             <img src={props.userProfile.photos.large}/>
+            <ProfileStatus status={'Hello everyone'}/>
         </div>
     );
 }
