@@ -9,7 +9,7 @@ import {compose} from "redux";
 
 class ProfileAPI extends React.Component {
     componentDidMount() {
-        let userId = this.props.match.params.userId || 6174;
+        let userId = this.props.match.params.userId || this.props.authorizedId;
         this.props.getProfile(userId);
         this.props.getStatus(userId);
     }
@@ -26,6 +26,8 @@ function mapStateToProps(state) {
     return {
         userProfile: state.profilePage.userProfile,
         status: state.profilePage.status,
+
+        authorizedId: state.auth.id,
     }
 }
 

@@ -2,6 +2,8 @@ import React from "react";
 import {Field, reduxForm} from "redux-form";
 import {maxLength, required} from "../../utils/validators";
 import {renderInput} from "../common/ValidatorForms/ValidatorForms";
+import s from "./Login.module.css";
+import {Redirect} from "react-router-dom";
 
 
 const maxLength30 = maxLength(30);
@@ -19,6 +21,9 @@ let LoginForm = (props) => {
             <div>
                 <Field component={'input'} type="checkbox" name="rememberMe"/> Remember me
             </div>
+            <div className={s.commonError}>
+                {props.error}
+            </div>
             <div>
                 <button>Login</button>
             </div>
@@ -34,6 +39,8 @@ const Login = (props) => {
         let {email, password, rememberMe = false} = formData;
         props.login(email, password, rememberMe);
     };
+
+    if (props.isLogin) return <Redirect to="/profile"/>
 
     return (
         <div>
