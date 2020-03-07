@@ -3,6 +3,7 @@ import s from './Dialogs.module.css';
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
 import {Redirect} from "react-router-dom";
+import {Field, reduxForm} from "redux-form";
 
 
 
@@ -10,13 +11,9 @@ function Dialogs(props) {
     let dialogs = props.dialogsPage.dialogs.map(({id, name, src}) => <Dialog id={id} name={name} src={src} key={id}/>);
     let messages = props.dialogsPage.messages.map(({message, id}) => <Message message={message} key={id}/>);
 
-    function addMessage() {
-        props.addMessage();
-    }
-
-    function  updateMessageText(event) {
-        let text = event.target.value;
-        props.updateMessageText(text);
+    function addMessage(formData) {
+        console.log(formData);
+        props.addMessage(formData.messageText);
     }
 
     // if (!props.isLogin) return <Redirect to='/login' />
@@ -30,13 +27,21 @@ function Dialogs(props) {
                 <div className={s.messages}>
                     {messages}
                 </div>
-                <div>
-                    <textarea onChange={updateMessageText} value={props.dialogsPage.newMessageText}></textarea>
-                    <button onClick={addMessage}>add message</button>
-                </div>
+                <AddMessageForm onSubmit={addMessage}/>
             </div>
         </div>
     );
 }
+
+let AddMessageForm = props => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <Field component={'textarea'} name="messageText" placeholder='enter message'></Field>
+            <button>add message</button>
+        </form>
+    );
+};
+
+AddMessageForm = reduxForm({form: 'addMessage'})(AddMessageForm);
 
 export default Dialogs;

@@ -32,12 +32,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
    return {
-       addMessage: () => {
-           dispatch(addMessageActionCreator());
+       addMessage: (messageText) => {
+           dispatch(addMessageActionCreator(messageText));
        },
-       updateMessageText: (text) => {
-           dispatch(updateMessageTextActionCreator(text));
-       }
    }
 }
 
