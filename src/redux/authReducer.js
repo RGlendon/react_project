@@ -15,7 +15,7 @@ function authReducer(state = initialState, action) {
             return {
                 ...state,
                 ...action.data,
-                isLogin: true
+                isLogin: action.isLogin,
             };
         default:
             return state;
@@ -25,14 +25,33 @@ function authReducer(state = initialState, action) {
 export default authReducer;
 
 
-export const setAuthInfo = (data) => ({type: SET_AUTH_INFO, data});
+export const setAuthInfo = (data, isLogin) => ({type: SET_AUTH_INFO, data, isLogin});
 
 //thunkCreators
 export const getAuthData = () => (dispatch) => {
     authAPI.me()
         .then(resp => {
+            // debugger
             if (resp.data.resultCode === 0) {
-                dispatch(setAuthInfo(resp.data.data));
+                dispatch(setAuthInfo(resp.data.data, true));
+            }
+        })
+}
+
+export const login = (email, password, rememberMe) => (dispatch) => {
+    authAPI.login(email, password, rememberMe)
+        .then(resp => {
+            if (resp.data.resultCode === 0) {
+                dispatch(getAuthData());
+            } else alert('неправильный логин или пароль');
+        })
+}
+
+export const logout = () => (dispatch) => {
+    authAPI.logout()
+        .then(resp => {
+            if (resp.data.resultCode === 0) {
+                dispatch(setAuthInfo({id: null, login: null, email: null,}, false));
             }
         })
 }

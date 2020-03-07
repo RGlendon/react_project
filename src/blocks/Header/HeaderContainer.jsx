@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from "./Header";
 import {connect} from "react-redux";
-import {getAuthData} from "../../redux/authReducer";
+import {getAuthData, logout} from "../../redux/authReducer";
 
 
 class HeaderAPI extends React.Component {
@@ -23,7 +23,8 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
     // thunkCreators
-    getAuthData
+    getAuthData,
+    logout
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderAPI);
