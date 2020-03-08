@@ -9,7 +9,8 @@ import {compose} from "redux";
 
 class ProfileAPI extends React.Component {
     componentDidMount() {
-        let userId = this.props.match.params.userId || this.props.authorizedId;
+        debugger
+        let userId = this.props.match.params.userId || this.props.authorizedId || this.props.history.push('/login');
         this.props.getProfile(userId);
         this.props.getStatus(userId);
     }

@@ -30,7 +30,7 @@ export const setAuthInfo = (data, isLogin) => ({type: SET_AUTH_INFO, data, isLog
 
 //thunkCreators
 export const getAuthData = () => (dispatch) => {
-    authAPI.me()
+   return authAPI.me()
         .then(resp => {
             // debugger
             if (resp.data.resultCode === 0) {
