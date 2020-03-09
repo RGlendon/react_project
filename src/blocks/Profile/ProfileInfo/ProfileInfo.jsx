@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
-import ProfileStatus from "./ProfileStatus";
+import ProfileStatusHook from "./ProfileStatusHook";
 
 
 function ProfileInfo(props) {
@@ -15,7 +15,7 @@ function ProfileInfo(props) {
                      alt=""/>
             </div>
             <img className={s.photo} src={props.userProfile.photos.large || 'https://cdn.pricearchive.org/images/aliexpress.com/32675545831/Francoise-Nielly-Hand-painted-Marilyn-Monroe-Oil-painting-Modern-Abstract-oil-painting-on-canvas-paintings-for.jpg'}/>
-            <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+            <ProfileStatusHook status={props.status} updateStatus={props.updateStatus}/>
         </div>
     );
 }
