@@ -17,8 +17,10 @@ const Paginator = (props) => {
     return (
         <div>
             <button onClick={() => { setPortionNumber(1) }}>to the start</button>
+
             {portionNumber > 1 &&
             <button onClick={() => { setPortionNumber(portionNumber - 1) }}>Back</button>}
+
             {pages
                 .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
                 .map(p => {
@@ -26,8 +28,10 @@ const Paginator = (props) => {
                         className={`${s.pageNumber} ${props.currentPage === p ? s.selectedPage : null}`}
                         onClick={() => { props.setCurrentPage(p) }} key={p}>{p}</span>
                 })}
+
             {portionCount > portionNumber &&
                 <button onClick={() => { setPortionNumber(portionNumber + 1) }}>Next</button>}
+
             <button onClick={() => { setPortionNumber(portionCount) }}>to the end</button>
         </div>
     );
