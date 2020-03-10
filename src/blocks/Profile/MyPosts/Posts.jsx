@@ -14,6 +14,7 @@ function Posts(props) {
         props.addPost(formData.postText);
     }
 
+    // console.log("RENDER Posts");
     return (
         <div>
             <h2>My posts</h2>

@@ -2,27 +2,17 @@ import React from "react";
 import s from './Users.module.css';
 import Preloader from "../common/Preloader/Preloader";
 import {NavLink} from "react-router-dom";
+import Paginator from "../common/Paginator/Paginator";
 
 
 function Users(props) {
-    let pageCount = Math.ceil(props.totalCount / props.pageSize);
-    let pages = [];
-
-    for (let i = 1; i <= pageCount; i++) {
-        pages.push(i);
-    }
-
     return (
         <div>
-            <div className={s.pageNumbersWrapper}>{
-                pages.map(p => {
-                    return <span
-                        className={`${s.pageNumber} ${props.currentPage === p ? s.selectedPage : null}`}
-                        onClick={() => {
-                            props.setCurrentPage(p)
-                        }} key={p}>{p}</span>
-                })}
-            </div>
+            <Paginator totalCount={props.totalCount}
+                       pageSize={props.pageSize}
+                       currentPage={props.currentPage}
+                       portionSize={'10'}
+                       setCurrentPage={props.setCurrentPage}/>
             {props.isLoading ? <Preloader/> : null}
             {props.users.map(u => {
                 return (
@@ -36,9 +26,13 @@ function Users(props) {
                             <div>
                                 {u.followed
                                     ? <button disabled={props.disabled.some(id => id === u.id)}
-                                              onClick={() => {props.unfollowThunkCreator(u.id);}}>Unfollow</button>
+                                              onClick={() => {
+                                                  props.unfollowThunkCreator(u.id);
+                                              }}>Unfollow</button>
                                     : <button disabled={props.disabled.some(id => id === u.id)}
-                                              onClick={() => {props.followThunkCreator(u.id);}}>Follow</button>}
+                                              onClick={() => {
+                                                  props.followThunkCreator(u.id);
+                                              }}>Follow</button>}
                             </div>
                         </div>
                         <div className={s.mainInfo}>
